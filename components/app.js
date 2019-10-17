@@ -48,11 +48,12 @@ new Vue({
     bikes,
     bike: bikes[0],
     selectedBike: 0,
-    isBikeDetails: false
+    isBikeDetails: false,
+    search: ""
   },
   methods: {
     selectBike: function(index) {
-      console.log(`select bike ${index}`);
+      // console.log(`select bike ${index}`);
       this.bike = bikes[index];
       this.selectedBike = index;
     }
@@ -60,6 +61,14 @@ new Vue({
   computed: {
     detailsBtnText() {
       return this.isBikeDetails ? "Hide details" : "Show details";
+    },
+    filteredBikes() {
+      return this.bikes.filter(bike => {
+        return (
+          bike.brand.toLowerCase().includes(this.search.toLowerCase()) ||
+          bike.model.toLowerCase().includes(this.search.toLowerCase())
+        );
+      });
     }
   }
 });

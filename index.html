@@ -26,12 +26,13 @@
               class="form-control"
               id="search"
               placeholder="brand, model ..."
+              v-model="search"
             />
           </div>
           <hr />
           <ul class="list-group">
             <li
-              v-for="(bike, index) of bikes"
+              v-for="(bike, index) of filteredBikes"
               class="list-group-item list-group-item-action pointer"
               v-on:click="selectBike(index)"
               v-bind:class="{'active': selectedBike === index}"
