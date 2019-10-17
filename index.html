@@ -56,9 +56,28 @@
                 <li>Brand: {{ bike.brand }}</li>
                 <li>Model: {{ bike.model }}</li>
                 <li>Year: {{ bike.year }}</li>
-                <li>Price: {{ bike.price }}</li>
+                <li>Sizes: {{ bike.sizes }}</li>
+                <li>Price: {{ bike.price }}$</li>
               </ul>
+              <button
+                class="btn btn-outline-success mr-3"
+                v-on:click="isBikeDetails = !isBikeDetails"
+              >
+                {{ detailsBtnText }}
+              </button>
               <button class="btn btn-primary">Buy</button>
+              <div class="row mt-3" v-if="isBikeDetails">
+                <div class="col">
+                  <ul class="list-group">
+                    <li
+                      v-for="bikeDetail in bike.details"
+                      class="list-group-item"
+                    >
+                      {{ bikeDetail }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
