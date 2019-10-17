@@ -13,7 +13,7 @@
     <title>Bikes Store on Vue.js</title>
   </head>
   <body>
-    <div class="container pt-5">
+    <div id="app" class="container pt-5">
       <div class="row mb-3">
         <div class="col"><h1>Bikes Store App</h1></div>
       </div>
@@ -30,14 +30,11 @@
           </div>
           <hr />
           <ul class="list-group">
-            <li class="list-group-item list-group-item-action pointer">
-              Bike #1
-            </li>
-            <li class="list-group-item list-group-item-action pointer">
-              Bike #2
-            </li>
-            <li class="list-group-item list-group-item-action pointer">
-              Bike #3
+            <li
+              v-for="bike of bikes"
+              class="list-group-item list-group-item-action pointer"
+            >
+              {{ bike.brand }} - {{ bike.model }}
             </li>
           </ul>
         </div>
@@ -64,5 +61,7 @@
         </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="components/app.js"></script>
   </body>
 </html>
