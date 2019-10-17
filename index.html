@@ -31,8 +31,10 @@
           <hr />
           <ul class="list-group">
             <li
-              v-for="bike of bikes"
+              v-for="(bike, index) of bikes"
               class="list-group-item list-group-item-action pointer"
+              v-on:click="selectBike(index)"
+              v-bind:class="{'active': selectedBike === index}"
             >
               {{ bike.brand }} - {{ bike.model }}
             </li>
@@ -41,19 +43,20 @@
         <div class="col-md-8 pt-4">
           <div class="row">
             <div class="col-md-5">
-              <h3>Bike name</h3>
+              <h3>{{ bike.brand }} - {{ bike.model }}</h3>
               <img
-                src="assets/images/rondo-ruut.jpg"
-                alt="rondo-ruut"
+                v-bind:src="bike.image"
+                v-bind:alt="bike.model"
                 class="bike-image"
               />
             </div>
             <div class="col-md-7 pt-2">
               <h5>Bike details</h5>
               <ul>
-                <li>...</li>
-                <li>...</li>
-                <li>...</li>
+                <li>Brand: {{ bike.brand }}</li>
+                <li>Model: {{ bike.model }}</li>
+                <li>Year: {{ bike.year }}</li>
+                <li>Price: {{ bike.price }}</li>
               </ul>
               <button class="btn btn-primary">Buy</button>
             </div>
