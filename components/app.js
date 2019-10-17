@@ -49,7 +49,8 @@ new Vue({
     bike: bikes[0],
     selectedBike: 0,
     isBikeDetails: false,
-    search: ""
+    search: "",
+    isModalCart: false
   },
   methods: {
     selectBike: function(index) {

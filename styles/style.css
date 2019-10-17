@@ -1,7 +1,11 @@
-ul {
+.pointer {
   cursor: pointer;
 }
 
 .bike-image {
   width: 290px;
+}
+
+.modal {
+  display: block;
 }
