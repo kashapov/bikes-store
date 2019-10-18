@@ -1,4 +1,4 @@
-createBike = (id, brand, model, year, price, image, sizes, details) => ({
+const createBike = (id, brand, model, year, price, image, sizes, details) => ({
   id,
   brand,
   model,
@@ -8,6 +8,8 @@ createBike = (id, brand, model, year, price, image, sizes, details) => ({
   sizes,
   details
 });
+
+const createLog = (text, type, date = new Date()) => ({ text, type, date });
 
 const bikes = [
   createBike(
@@ -50,13 +52,23 @@ new Vue({
     selectedBike: 0,
     isBikeDetails: false,
     search: "",
-    isModalCart: false
+    isModalCart: false,
+    logs: []
   },
   methods: {
-    selectBike: function(index) {
-      // console.log(`select bike ${index}`);
+    selectBike(index) {
       this.bike = bikes[index];
       this.selectedBike = index;
+    },
+    newOrder() {
+      this.isModalCart = false;
+      const orderText = `Success order: ${this.bike.brand} - ${this.bike.model}`;
+      this.logs.push(createLog(orderText, "success"));
+    },
+    cancelOrder() {
+      this.isModalCart = false;
+      const orderText = `Cancelled order: ${this.bike.brand} - ${this.bike.model}`;
+      this.logs.push(createLog(orderText, "cancel"));
     }
   },
   computed: {
@@ -70,6 +82,11 @@ new Vue({
           bike.model.toLowerCase().includes(this.search.toLowerCase())
         );
       });
+    },
+    filters: {
+      normalizeDate(value) {
+        return value.toLocaleString();
+      }
     }
   }
 });

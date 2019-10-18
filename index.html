@@ -86,6 +86,21 @@
         </div>
       </div>
 
+      <div class="row pt-3" v-if="logs.length">
+        <div class="col-md-12">
+          <ul class="list-group">
+            <li
+              v-for="log in logs"
+              class="list-group-item"
+              v-bind:class="{'list-group-item-secondary': log.type === 'cancel',
+                'list-group-item-success': log.type === 'success'}"
+            >
+              {{ log.text }} {{ log.date | normalizeDate }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <div
         class="modal fade show"
         tabindex="-1"
@@ -107,17 +122,31 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>Modal body text goes here.</p>
+              <h3>{{ bike.brand }} - {{ bike.model }}</h3>
+              <h5>Bike details</h5>
+              <ul>
+                <li>Brand: {{ bike.brand }}</li>
+                <li>Model: {{ bike.model }}</li>
+                <li>Year: {{ bike.year }}</li>
+                <li>Sizes: {{ bike.sizes }}</li>
+                <li>Price: {{ bike.price }}$</li>
+              </ul>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Buy</button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                v-on:click="newOrder"
+              >
+                Buy
+              </button>
               <button
                 type="button"
                 class="btn btn-secondary"
                 data-dismiss="modal"
-                v-on:click="isModalCart = false"
+                v-on:click="cancelOrder"
               >
-                Close
+                Cancel
               </button>
             </div>
           </div>
