@@ -9,3 +9,48 @@
 .modal {
   display: block;
 }
+
+/* Animations */
+
+.bikeDetails-enter-active,
+.bikeDetails-leave-active {
+  transition: all 0.5s;
+}
+
+.bikeDetails-enter,
+.bikeDetails-leave-to {
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.5s;
+}
+
+.modal-enter,
+.modal-leave-to {
+  transform: translateY(-100px);
+}
+
+.fade-enter-active {
+  animation: 0.75s fade forwards;
+}
+
+.fade-leave-active {
+  animation: 0.75s fade reverse;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}

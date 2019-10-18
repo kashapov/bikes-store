@@ -60,27 +60,30 @@
                 <li>Sizes: {{ bike.sizes }}</li>
                 <li>Price: {{ bike.price }}$</li>
               </ul>
+              <button class="btn btn-primary" v-on:click="isModalCart = true">
+                Buy
+              </button>
               <button
                 class="btn btn-outline-success mr-3"
                 v-on:click="isBikeDetails = !isBikeDetails"
               >
                 {{ detailsBtnText }}
               </button>
-              <button class="btn btn-primary" v-on:click="isModalCart = true">
-                Buy
-              </button>
-              <div class="row mt-3" v-if="isBikeDetails">
-                <div class="col">
-                  <ul class="list-group">
-                    <li
-                      v-for="bikeDetail in bike.details"
-                      class="list-group-item"
-                    >
-                      {{ bikeDetail }}
-                    </li>
-                  </ul>
+
+              <transition name="bikeDetails">
+                <div class="row mt-3" v-if="isBikeDetails">
+                  <div class="col">
+                    <ul class="list-group">
+                      <li
+                        v-for="bikeDetail in bike.details"
+                        class="list-group-item"
+                      >
+                        {{ bikeDetail }}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              </transition>
             </div>
           </div>
         </div>
@@ -101,58 +104,63 @@
         </div>
       </div>
 
-      <div
-        class="modal fade show"
-        tabindex="-1"
-        role="dialog"
-        v-if="isModalCart"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Do you want buy this bike?</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-                v-on:click="isModalCart = false"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <h3>{{ bike.brand }} - {{ bike.model }}</h3>
-              <h5>Bike details</h5>
-              <ul>
-                <li>Brand: {{ bike.brand }}</li>
-                <li>Model: {{ bike.model }}</li>
-                <li>Year: {{ bike.year }}</li>
-                <li>Sizes: {{ bike.sizes }}</li>
-                <li>Price: {{ bike.price }}$</li>
-              </ul>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-primary"
-                v-on:click="newOrder"
-              >
-                Buy
-              </button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-                v-on:click="cancelOrder"
-              >
-                Cancel
-              </button>
+      <transition name="modal">
+        <div
+          class="modal fade show"
+          tabindex="-1"
+          role="dialog"
+          v-if="isModalCart"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Do you want buy this bike?</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  v-on:click="isModalCart = false"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h3>{{ bike.brand }} - {{ bike.model }}</h3>
+                <h5>Bike details</h5>
+                <ul>
+                  <li>Brand: {{ bike.brand }}</li>
+                  <li>Model: {{ bike.model }}</li>
+                  <li>Year: {{ bike.year }}</li>
+                  <li>Sizes: {{ bike.sizes }}</li>
+                  <li>Price: {{ bike.price }}$</li>
+                </ul>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  v-on:click="newOrder"
+                >
+                  Buy
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                  v-on:click="cancelOrder"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-backdrop fade show" v-if="isModalCart"></div>
+      </transition>
+
+      <transition name="fade">
+        <div class="modal-backdrop fade show" v-if="isModalCart"></div>
+      </transition>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="components/app.js"></script>
